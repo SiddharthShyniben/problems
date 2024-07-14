@@ -11,6 +11,8 @@
   "author": "Siddharth Shyniben <siddharth.muscat@gmail.com> (https://siddu.tech/)",
   "license": "ISC",
   "dependencies": {
+    "@nuff-said/color": "^1.0.0",
+    "diagonjs": "^1.6.1",
     "mathjs": "^13.0.2",
     "nerdamer": "^1.1.13"
   }
