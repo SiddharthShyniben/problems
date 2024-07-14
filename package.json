@@ -1,0 +1,17 @@
+{
+  "name": "problems",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Siddharth Shyniben <siddharth.muscat@gmail.com> (https://siddu.tech/)",
+  "license": "ISC",
+  "dependencies": {
+    "mathjs": "^13.0.2",
+    "nerdamer": "^1.1.13"
+  }
+}
