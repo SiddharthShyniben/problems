@@ -1,5 +1,5 @@
 import Diagon from "diagonjs";
-import { evaluate, roundDependencies, simplify } from "mathjs";
+import { evaluate } from "mathjs";
 import { names } from "./equations.js";
 import { units } from "./data.js";
 
@@ -23,53 +23,54 @@ export async function render(equation, problem) {
 
   let runningScope = { ...problem.vals };
 
-  for (const step of steps) {
-    let [finding, withVals] = step.split(" = ");
-    let oldWithVals = withVals,
-      oldFinding = finding;
+  if (steps.length > 2)
+    for (const step of steps) {
+      let [finding, withVals] = step.split(" = ");
+      let oldWithVals = withVals,
+        oldFinding = finding;
 
-    for (const [k, v] of Object.entries(runningScope)) {
-      withVals = withVals.replaceAll(
-        (names[k] || k).replaceAll(" ", "·"),
-        v.toString(),
-      );
+      for (const [k, v] of Object.entries(runningScope)) {
+        withVals = withVals.replaceAll(
+          (names[k] || k).replaceAll(" ", "·"),
+          v.toString(),
+        );
 
-      finding = finding.replaceAll(
-        (names[k] || k).replaceAll(" ", "·"),
-        v.toString(),
-      );
-    }
+        finding = finding.replaceAll(
+          (names[k] || k).replaceAll(" ", "·"),
+          v.toString(),
+        );
+      }
 
-    if (oldWithVals !== withVals) {
-      if (finding !== oldFinding)
+      if (oldWithVals !== withVals) {
+        if (finding !== oldFinding)
+          console.log(
+            diagon.translate
+              .math(step + " = " + finding + " = " + withVals, {
+                style: "Unicode",
+              })
+              .replace(/([^\s])·([^\s])/g, "$1 $2"),
+          );
+        else
+          console.log(
+            diagon.translate
+              .math(step + " = " + withVals, { style: "Unicode" })
+              .replace(/([^\s])·([^\s])/g, "$1 $2"),
+          );
+      } else if (finding !== oldFinding)
         console.log(
           diagon.translate
-            .math(step + " = " + finding + " = " + withVals, {
-              style: "Unicode",
-            })
+            .math(step + " = " + finding, { style: "Unicode" })
             .replace(/([^\s])·([^\s])/g, "$1 $2"),
         );
       else
         console.log(
           diagon.translate
-            .math(step + " = " + withVals, { style: "Unicode" })
+            .math(step, { style: "Unicode" })
             .replace(/([^\s])·([^\s])/g, "$1 $2"),
         );
-    } else if (finding !== oldFinding)
-      console.log(
-        diagon.translate
-          .math(step + " = " + finding, { style: "Unicode" })
-          .replace(/([^\s])·([^\s])/g, "$1 $2"),
-      );
-    else
-      console.log(
-        diagon.translate
-          .math(step, { style: "Unicode" })
-          .replace(/([^\s])·([^\s])/g, "$1 $2"),
-      );
 
-    console.log();
-  }
+      console.log();
+    }
 
   console.log(
     diagon.translate

@@ -1,10 +1,9 @@
 import { eq, inTermsOf, namesInTermsOf } from "./util.js";
 
 export const equations = [
-  "temp_kelvin = temp_celsius + 273.15",
+  "temp_kelvin = temp_celsius + 273",
   "temp_fahrenheit = (9 * temp_celsius / 5) + 32",
 
-  "Xa + Xb = 1",
   "Xa = a_moles_molecules / (a_moles_molecules + b_moles_molecules)",
   "Xb = b_moles_molecules / (a_moles_molecules + b_moles_molecules)",
 
