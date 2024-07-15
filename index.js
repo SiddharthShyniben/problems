@@ -5,7 +5,13 @@ import "nerdamer/Solve.js";
 import { evaluate, simplify } from "mathjs";
 import Diagon from "diagonjs";
 
-import { analogies, equations, getRandomInt, names } from "./equations.js";
+import {
+  analogies,
+  equations,
+  getRandomInt,
+  names,
+  units,
+} from "./equations.js";
 
 function buildEquation(equation, max_depth = 1, depth = 0) {
   const find =
@@ -18,8 +24,9 @@ function buildEquation(equation, max_depth = 1, depth = 0) {
   };
 
   problem.steps = [
+    find === equation.variables[0] ? null : equation.equation,
     find + " = " + simplify(problem.equation, { exactFractions: true }),
-  ];
+  ].filter(Boolean);
   problem.given = [
     ...new Set(
       equation.variables
@@ -69,7 +76,13 @@ function buildProblem({ find, given }) {
   const vals = { Na: "602200000000000000000000" };
   for (const k of given) vals[k] = getRandomInt(1, 15);
   return {
-    str: `Find the ${names[find] || find}, if ${given.map((item, i) => `${i === given.length - 1 && given.length > 1 ? "and " : ""}${names[item] || item} is ${vals[item]}`).join(", ")}\n${JSON.stringify({ find, given })}`,
+    str: `Find the ${names[find] || find}, if ${given
+      .map(
+        (item, i) =>
+          `${i === given.length - 1 && given.length > 1 ? "and " : ""}${names[item] || item} is ${vals[item]}${units[item] || ""}`,
+      )
+      .join(", ")}
+${JSON.stringify({ find, given })}`,
     vals,
   };
 }
@@ -77,7 +90,8 @@ function buildProblem({ find, given }) {
 console.clear();
 console.log();
 const equation = buildEquation(
-  equations[Math.floor(Math.random() * equations.length)],
+  // equations[Math.floor(Math.random() * equations.length)],
+  equations[0],
 );
 const problem = buildProblem(equation);
 
@@ -124,8 +138,14 @@ for (const [k, v] of Object.entries(problem.vals)) {
 
 console.log(
   diagon.translate
-    .math(withVals + "=" + evaluate(equation.equation, problem.vals), {
-      style: "Unicode",
-    })
+    .math(
+      withVals +
+        "=" +
+        evaluate(equation.equation, problem.vals) +
+        (units[problem.find] || ""),
+      {
+        style: "Unicode",
+      },
+    )
     .replace(/([^\s])·([^\s])/g, "$1 $2"),
 );

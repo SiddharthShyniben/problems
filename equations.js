@@ -71,14 +71,17 @@ export const equations = [
     equation: "mass_percent = mass_solute * 100 / mass_solvent",
     variables: ["mass_percent", "mass_solute", "mass_solvent"],
   },
-  { equation: "Xa + Xb = 1", variables: ["Xa", "Xb"] },
+  {
+    equation: "Xa + Xb = 1",
+    variables: ["Xa", "Xb"],
+  },
   {
     equation: "Xa = moles_a / (moles_a + moles_b)",
     variables: ["Xa", "moles_a", "moles_b"],
   },
   {
     equation: "Xb = moles_b / (moles_a + moles_b)",
-    variables: ["Xb", "moles_a", "moles_b"], // TODO: expand
+    variables: ["Xb", "moles_a", "moles_b"],
   },
   {
     equation: "molarity = mole_molecules_solute / volume_solvent",
@@ -93,11 +96,11 @@ export const equations = [
 export const names = {
   n_molecules: "number of molecules",
   mass_molecules: "mass of one mole molecules",
-  moles_molecules: "number of mole molecules",
+  moles_molecules: "amount of molecules",
   mass_one_molecule: "mass of one molecule",
   n_atoms: "number of atoms",
   mass_atoms: "mass of one mole atoms",
-  mole_atoms: "number of mole atoms",
+  mole_atoms: "amount of atoms",
   mass_one_atom: "mass of one atom",
   mole_molecules_solute: "number of moles of solute",
   mole_molecules_solvent: "number of moles of solvent",
@@ -115,6 +118,23 @@ export const names = {
   moles_b: "number of moles of B",
   volume_solvent: "volume of solvent",
   vapor_density: "vapor density",
+};
+
+export const units = {
+  mass_molecules: "g/mol",
+  moles_molecules: "mol",
+  mole_atoms: "mol",
+  temp_celsius: "°C",
+  temp_kelvin: "K",
+  temp_fahrenheit: "°F",
+  mass_one_molecule: "g",
+  mass_atoms: "g/mol",
+  mass_one_atom: "g",
+  vol: "L",
+  mass_solute: "g",
+  mass_solvent: "g",
+  volume_solvent: "L",
+  weight: "g",
 };
 
 export const colors = [
@@ -148,8 +168,8 @@ export const analogies = [
       return {
         vals: {
           mass_atoms: z,
-          n_atoms: y,
-          n_molecules: z,
+          n_atoms: y + "Na",
+          n_molecules: x + "Na",
         },
         str:
           Math.random() > 0.5
@@ -231,9 +251,9 @@ export const analogies = [
       return {
         vals: {
           weight: x,
-          n_molecules: y,
+          n_molecules: y + "Na",
         },
-        str: `If ${x}g of a substance has ${y} molecules, find the mass of one molecule of the substance`,
+        str: `If ${x}g of a substance has ${y}Na molecules, find the mass of one molecule of the substance`,
       };
     }
   },
@@ -251,19 +271,6 @@ export const analogies = [
   },
 ];
 
-// const els = [
-//   ["oxygen", 2],
-//   ["hydrogen", 2],
-//   ["nitrogen", 2],
-//   ["fluorine", 2],
-//   ["iodine", 2],
-//   ["chlorine", 2],
-//   ["bromine", 2],
-//   ["sulfur", 8],
-//   ["potassium", 5],
-// ];
-//
 // TODO: A concentrated solution with a high molality (let's say 10 mol/kg) is available. How much solvent (in kg) needs to be added to 2 moles of the solution to create a new solution with a final molality of 3 mol/kg?
 // TODO eval each step
-// TODO units
 // TODO find path of least resistance when solving
