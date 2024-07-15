@@ -1,0 +1,30 @@
+export const massTable = [
+  ["hydrogen", 2],
+  ["helium", 4],
+  ["lithium", 7],
+  ["beryllium", 13],
+  ["boron", 11],
+  ["carbon", 12],
+  ["nitrogen", 14],
+  ["oxygen", 16],
+  ["fluorine", 19],
+  ["neon", 20],
+  ["sodium", 23],
+];
+
+export const units = {
+  mass_molecules: "g/mol",
+  moles_molecules: "mol",
+  mole_atoms: "mol",
+  temp_celsius: "°C",
+  temp_kelvin: "K",
+  temp_fahrenheit: "°F",
+  mass_one_molecule: "g",
+  mass_atoms: "g/mol",
+  mass_one_atom: "g",
+  vol: "L",
+  mass_solute: "g",
+  mass_solvent: "g",
+  volume_solvent: "L",
+  weight: "g",
+};
