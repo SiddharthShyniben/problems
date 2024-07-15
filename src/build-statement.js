@@ -15,7 +15,7 @@ export function buildStatement({ find, given }) {
         (item, i) =>
           `${i === given.length - 1 && given.length > 1 ? "and " : ""}${names[item] || item} is ${vals[item]}${units[item] || ""}`,
       )
-      .join(", ")}`,
+      .join(", ")}\n${process.argv[2] ? JSON.stringify({ find, given }) : ""}`,
     vals,
   };
 }
