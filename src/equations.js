@@ -4,8 +4,8 @@ export const equations = [
     variables: ["molality", "mole_molecules_solute", "mole_molecules_solvent"],
   },
   {
-    equation: "n_moles = vol / 22.4",
-    variables: ["n_molecules", "vol"],
+    equation: "n_moles = volm / 22.4",
+    variables: ["n_molecules", "volm"],
   },
   {
     equation: "n_molecules = moles_molecules * Na",
@@ -84,7 +84,7 @@ export const names = {
   temp_celsius: "temperature in celsius",
   temp_kelvin: "temperature in kelvin",
   temp_fahrenheit: "temperature in fahrenheit",
-  vol: "volume in liters",
+  volm: "volume in liters",
   mass_percent: "mass %",
   mass_solute: "mass of solute",
   mass_solvent: "mass of solvent",

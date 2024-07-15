@@ -24,30 +24,49 @@ export async function render(equation, problem) {
   let runningScope = { ...problem.vals };
 
   for (const step of steps) {
-    console.log(
-      diagon.translate
-        .math(step, { style: "Unicode" })
-        .replace(/([^\s])·([^\s])/g, "$1 $2"),
-    );
-
     let [finding, withVals] = step.split(" = ");
+    let oldWithVals = withVals,
+      oldFinding = finding;
+
     for (const [k, v] of Object.entries(runningScope)) {
       withVals = withVals.replaceAll(
         (names[k] || k).replaceAll(" ", "·"),
         v.toString(),
       );
+
       finding = finding.replaceAll(
         (names[k] || k).replaceAll(" ", "·"),
         v.toString(),
       );
     }
 
-    console.log(
-      diagon.translate
-        .math(finding + " = " + withVals) // TODO: simplify
-        .replace(finding, " ".repeat(finding.length))
-        .replace(/([^\s])·([^\s])/g, "$1 $2"),
-    );
+    if (oldWithVals !== withVals) {
+      if (finding !== oldFinding)
+        console.log(
+          diagon.translate
+            .math(step + " = " + finding + " = " + withVals, {
+              style: "Unicode",
+            })
+            .replace(/([^\s])·([^\s])/g, "$1 $2"),
+        );
+      else
+        console.log(
+          diagon.translate
+            .math(step + " = " + withVals, { style: "Unicode" })
+            .replace(/([^\s])·([^\s])/g, "$1 $2"),
+        );
+    } else if (finding !== oldFinding)
+      console.log(
+        diagon.translate
+          .math(step + " = " + finding, { style: "Unicode" })
+          .replace(/([^\s])·([^\s])/g, "$1 $2"),
+      );
+    else
+      console.log(
+        diagon.translate
+          .math(step, { style: "Unicode" })
+          .replace(/([^\s])·([^\s])/g, "$1 $2"),
+      );
 
     console.log();
   }
