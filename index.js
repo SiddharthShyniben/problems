@@ -5,7 +5,7 @@ import { render } from "./src/render.js";
 
 const equation = buildProblem(
   // equations[Math.floor(Math.random() * equations.length)],
-  equations[0],
+  equations[3],
 );
 const problem = buildStatement(equation);
 

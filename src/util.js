@@ -17,3 +17,46 @@ export function getRandomInt(min, max) {
 
 export const hasSameElements = (arr1, arr2) =>
   arr1.length == arr2.length && arr2.every((item) => arr1.includes(item));
+
+export const eq = (equation) =>
+  equation.equation
+    ? equation
+    : {
+        equation,
+        variables: [...equation.matchAll(/([A-z_])+/g)]
+          .map((x) => x[0])
+          .filter((x) => x !== "Na"),
+      };
+
+export function inTermsOf(prefixes, ...eqs) {
+  const equations = [];
+
+  for (const prefix of ["def", ...prefixes]) {
+    for (const equation of eqs) {
+      equations.push(eq(equation.replaceAll("{}", prefix)));
+    }
+  }
+
+  return equations;
+}
+
+export function namesInTermsOf(prefixes, object) {
+  const out = Object.assign(
+    Object.fromEntries(
+      Object.entries(object).map(([a, b]) => [
+        "def_" + a,
+        b.replace(/{.*?}/g, ""),
+      ]),
+    ),
+    ...prefixes.map((pre) =>
+      Object.fromEntries(
+        Object.entries(object).map(([a, b]) => [
+          pre + "_" + a,
+          b.replace(/[{}]/g, "").replaceAll("$", pre.toUpperCase()),
+        ]),
+      ),
+    ),
+  );
+
+  return out;
+}
