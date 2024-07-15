@@ -4,8 +4,7 @@ import { buildStatement } from "./src/build-statement.js";
 import { render } from "./src/render.js";
 
 const equation = buildProblem(
-  // equations[Math.floor(Math.random() * equations.length)],
-  equations[3],
+  equations[Math.floor(Math.random() * equations.length)],
 );
 const problem = buildStatement(equation);
 
