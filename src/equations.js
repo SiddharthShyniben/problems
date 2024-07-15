@@ -1,18 +1,10 @@
 export const equations = [
   {
-    equation: "n_molecules = (weight * Na) / mass_molecules",
-    variables: ["n_molecules", "weight", "mass_molecules"],
-  },
-  {
-    equation: "n_atoms = (weight * Na) / mass_atoms",
-    variables: ["n_atoms", "weight", "mass_atoms"],
-  },
-  {
     equation: "molality = mole_molecules_solute / mole_molecules_solvent",
     variables: ["molality", "mole_molecules_solute", "mole_molecules_solvent"],
   },
   {
-    equation: "n_molecules = vol * Na / 22.4",
+    equation: "n_moles = vol / 22.4",
     variables: ["n_molecules", "vol"],
   },
   {
@@ -24,8 +16,8 @@ export const equations = [
     variables: ["n_atoms", "mole_atoms"],
   },
   {
-    equation: "n_atoms = n_molecules * atoms_per_molecule",
-    variables: ["n_atoms", "n_molecules", "atoms_per_molecule"],
+    equation: "atoms_per_molecule = n_atoms / n_molecules",
+    variables: ["atoms_per_molecule", "n_atoms", "n_molecules"],
   },
   {
     equation: "mole_atoms = weight / mass_atoms",

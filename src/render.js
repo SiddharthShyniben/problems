@@ -1,5 +1,5 @@
 import Diagon from "diagonjs";
-import { evaluate, roundDependencies } from "mathjs";
+import { evaluate, roundDependencies, simplify } from "mathjs";
 import { names } from "./equations.js";
 import { units } from "./data.js";
 
@@ -36,11 +36,16 @@ export async function render(equation, problem) {
         (names[k] || k).replaceAll(" ", "·"),
         v.toString(),
       );
+      finding = finding.replaceAll(
+        (names[k] || k).replaceAll(" ", "·"),
+        v.toString(),
+      );
     }
 
     console.log(
       diagon.translate
-        .math(finding + " = " + evaluate(withVals, runningScope))
+        .math(finding + " = " + withVals) // TODO: simplify
+        .replace(finding, " ".repeat(finding.length))
         .replace(/([^\s])·([^\s])/g, "$1 $2"),
     );
 
