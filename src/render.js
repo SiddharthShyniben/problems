@@ -1,5 +1,5 @@
 import Diagon from "diagonjs";
-import { evaluate } from "mathjs";
+import { evaluate, roundDependencies } from "mathjs";
 import { names } from "./equations.js";
 import { units } from "./data.js";
 
@@ -21,19 +21,38 @@ export async function render(equation, problem) {
     );
   });
 
+  let runningScope = { ...problem.vals };
+
   for (const step of steps) {
     console.log(
       diagon.translate
         .math(step, { style: "Unicode" })
         .replace(/([^\s])·([^\s])/g, "$1 $2"),
     );
+
+    let [finding, withVals] = step.split(" = ");
+    for (const [k, v] of Object.entries(runningScope)) {
+      withVals = withVals.replaceAll(
+        (names[k] || k).replaceAll(" ", "·"),
+        v.toString(),
+      );
+    }
+
+    console.log(
+      diagon.translate
+        .math(finding + " = " + evaluate(withVals, runningScope))
+        .replace(/([^\s])·([^\s])/g, "$1 $2"),
+    );
+
     console.log();
   }
+
   console.log(
     diagon.translate
       .math(eqn, { style: "Unicode" })
       .replace(/([^\s])·([^\s])/g, "$1 $2"),
   );
+
   let withVals = eqn;
   for (const [k, v] of Object.entries(problem.vals)) {
     withVals = withVals.replaceAll(
