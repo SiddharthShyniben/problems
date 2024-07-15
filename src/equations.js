@@ -40,7 +40,7 @@ export const names = Object.assign(
     moles_b: "number of moles of B",
     volume_solvent: "volume of solvent",
   },
-  namesInTermsOf(["a", "b"], {
+  namesInTermsOf(["a", "b", "solute", "solvent"], {
     moles_molecules: "amount of molecules{ of $}",
     volm: "volume{ of $} in liters",
     n_molecules: "number of molecules{ of $}",
@@ -58,5 +58,3 @@ export const names = Object.assign(
     vapor_density: "vapor density{ of $}",
   }),
 );
-
-console.log(equations, names);
