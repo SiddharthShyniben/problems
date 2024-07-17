@@ -1,4 +1,5 @@
 import color from "@nuff-said/color";
+import { constants } from "./data.js";
 export const colors = [
   color.red,
   color.green,
@@ -25,10 +26,10 @@ export const eq = (equation) =>
         equation,
         variables: [...equation.matchAll(/([A-z_])+/g)]
           .map((x) => x[0])
-          .filter((x) => x !== "Na"),
+          .filter((x) => ![...Object.keys(constants)].includes(x)),
       };
 
-export function inTermsOf(prefixes, ...eqs) {
+export function eqsInTermsOf(prefixes, ...eqs) {
   const equations = [];
 
   for (const prefix of ["def", ...prefixes]) {
@@ -52,8 +53,22 @@ export function namesInTermsOf(prefixes, object) {
       Object.fromEntries(
         Object.entries(object).map(([a, b]) => [
           pre + "_" + a,
-          b.replace(/[{}]/g, "").replaceAll("$", pre.toUpperCase()),
+          b
+            .replace(/[{}]/g, "")
+            .replaceAll("$", pre.length === 1 ? pre.toUpperCase() : pre),
         ]),
+      ),
+    ),
+  );
+
+  return out;
+}
+
+export function inTermsOf(prefixes, object) {
+  const out = Object.assign(
+    ...prefixes.map((pre) =>
+      Object.fromEntries(
+        Object.entries(object).map(([a, b]) => [pre + "_" + a, b]),
       ),
     ),
   );

@@ -1,4 +1,4 @@
-import { massTable } from "./data.js";
+import { constants, massTable } from "./data.js";
 import { getRandomInt, hasSameElements } from "./util.js";
 
 export const analogies = [
@@ -75,7 +75,7 @@ export const analogies = [
         vals: {
           weight: x,
           mass_atoms: y,
-          Na: 602200000000000000000000,
+          Na: constants.Na,
         },
         str:
           Math.random() > 0.5

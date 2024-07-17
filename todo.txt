@@ -1,4 +1,4 @@
 - A concentrated solution with a high molality (let's say 10 mol/kg) is available. How much solvent (in kg) needs to be added to 2 moles of the solution to create a new solution with a final molality of 3 mol/kg?
-- eval each step
 - find path of least resistance when solving
 - proper limits for all variables (no.of molecules shouldnt be 3 or 7, Xa+Xb must be 1, etc.)
+- add debugger

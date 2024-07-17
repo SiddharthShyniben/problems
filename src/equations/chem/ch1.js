@@ -1,4 +1,4 @@
-import { eq, inTermsOf, namesInTermsOf } from "../../util.js";
+import { eq, eqsInTermsOf, namesInTermsOf } from "../../util.js";
 
 export const chemCh1Equations = [
   "temp_kelvin = temp_celsius + 273",
@@ -10,7 +10,7 @@ export const chemCh1Equations = [
   "molality = solute_moles_molecules / solvent_moles_molecules",
   "molarity = solute_moles_molecules / solvent_volm",
 
-  ...inTermsOf(
+  ...eqsInTermsOf(
     ["a", "b", "solute", "solvent"],
     "{}_moles_molecules = {}_volm / 22.4",
     "{}_n_molecules = {}_moles_molecules * Na",
@@ -21,7 +21,7 @@ export const chemCh1Equations = [
     "{}_mass_one_atom = {}_mass_atoms / Na",
     "{}_mass_one_molecule = {}_mass_molecules / Na",
     "{}_mass_percent = {}_mass_solute * 100 / {}_mass_solvent",
-    "{}_mass_molecules = 2 * vapor_density",
+    "{}_mass_molecules = 2 * {}_vapor_density",
   ),
 ].map(eq);
 

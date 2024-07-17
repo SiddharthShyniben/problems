@@ -1,6 +1,6 @@
 import Diagon from "diagonjs";
 import { evaluate } from "mathjs";
-import { names } from "./equations.js";
+import { equations, names } from "./equations.js";
 import { units } from "./data.js";
 
 export async function render(equation, problem) {
@@ -92,11 +92,13 @@ export async function render(equation, problem) {
         withVals +
           "=" +
           evaluate(equation.equation, problem.vals) +
-          (units[problem.find] || ""),
+          (units[equation.find] || ""),
         {
           style: "Unicode",
         },
       )
       .replace(/([^\s])·([^\s])/g, "$1 $2"),
   );
+
+  console.log({ problem, equation });
 }
